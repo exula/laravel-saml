@@ -42,7 +42,16 @@ class Account {
         if ($this->IdExists($id)) {
             $property = $this->getUserIdProperty();
             $userid = (int)User::where($property, "=", $id)->take(1)->get()[0]->id;
-            Auth::login(User::find($userid));
+
+            //If the config says so, update the user with information from the mapping on every login.
+            //This is useful if your SAML source is the authoritative source of information for your users.
+            $user = User::find($userid);
+            if(Config::get('laravel-saml::saml.saml_update_on_login',false)) {
+                $this->fillUserDetails($user);
+                $user->save();
+            }
+
+            Auth::login($user);
         }
     }
 
