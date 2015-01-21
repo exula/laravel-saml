@@ -41,7 +41,7 @@ class Account {
     {
         if ($this->IdExists($id)) {
             $property = $this->getUserIdProperty();
-            $userid = (int)User::where($property, "=", $id)->take(1)->get()[0]->id;
+            $userid = User::where($property, "=", $id)->take(1)->get()[0]->$property;
 
             //If the config says so, update the user with information from the mapping on every login.
             //This is useful if your SAML source is the authoritative source of information for your users.
