@@ -1,9 +1,9 @@
 <?php
 
 use KnightSwarm\LaravelSaml\Account;
-use \Saml;
-use \Auth;
-use \Session;
+use KnightSwarm\LaravelSaml\Saml;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class SamlController extends BaseController {
 
